@@ -13,8 +13,8 @@ insert into cidade (nome) values ('Sao Paulo');
 insert into Estado (nome) values ('Sao Paulo');
 insert into cidade (nome) values ('Guarulhos');
 
-insert into Estado (nome) values ('Sao Paulo');
-insert into cidade (nome) values ('Sao Bernardo');
+insert into Estado (nome) values ('Rio de Janeiro');
+insert into cidade (nome) values ('Sao Goncalo');
 
 insert into permissao (nome, descricao) values ('Consulta', 'Todos os usuarios possuem acesso para visualização do produto')
 insert into permissao (nome, descricao) values ('Compra', 'usuario com perfil de compra')
