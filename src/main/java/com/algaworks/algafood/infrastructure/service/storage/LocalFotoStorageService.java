@@ -4,18 +4,20 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
+import com.algaworks.algafood.core.storage.StorageProperties;
 import com.algaworks.algafood.domain.service.FotoStorageService;
-import com.algaworks.algafood.domain.service.FotoStorageService.NovaFoto;
 
-@Service
+//@Service
 public class LocalFotoStorageService implements FotoStorageService {
 
-
-	@Value("${algafood.storage.local.diretorio-fotos}")
+	@Autowired
+	private StorageProperties storageProperties;
+	
+//	@Value("${algafood.storage.local.diretorio-fotos}")
 	private Path diretorioFotos;
 	
 	@Override
@@ -32,7 +34,7 @@ public class LocalFotoStorageService implements FotoStorageService {
 	@Override
 	public void armazenar(NovaFoto novaFoto) {
 		try {
-			Path arquivoPath = getArquivoPath(novaFoto.getNomeAquivo());
+			Path arquivoPath = getArquivoPath(novaFoto.getNomeArquivo());
 			
 			FileCopyUtils.copy(novaFoto.getInputStream(), 
 					Files.newOutputStream(arquivoPath));
@@ -53,6 +55,8 @@ public class LocalFotoStorageService implements FotoStorageService {
 	}
 
 	private Path getArquivoPath(String nomeArquivo) {
-		return diretorioFotos.resolve(Path.of(nomeArquivo));
+	//	return diretorioFotos.resolve(Path.of(nomeArquivo));
+		return storageProperties.getLocal().getDiretorioFotos()
+				.resolve(Path.of(nomeArquivo));
 	}
 }
